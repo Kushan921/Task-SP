@@ -19,14 +19,17 @@ router.route("/add").post((req,res)=>{
 
 
 // http://localhost:8080/user/
-router.route("/").get((req,res)=>{
-    User.find().then((user)=>{
-        res.json(user);
-    }).catch((err)=>{
+router.route("/").get((req, res) => {
+    User.find().select('username')
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) => {
         console.log(err);
-        res.status(500).json({ error: "Error fetching tasks" });
-    });
-});
+        res.status(500).json({ error: "Error fetching users" });
+      });
+  });
+  
 
 
 
