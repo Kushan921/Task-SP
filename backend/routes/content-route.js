@@ -17,15 +17,15 @@ router.route("/add").post((req,res)=>{
 });
 
 
-// // http://localhost:8020/content/
-// router.route("/").get((req,res)=>{
-//     Contents.find().then((content)=>{
-//         res.json(content);
-//     }).catch((err)=>{
-//         console.log(err);
-//         res.status(500).json({ error: "Error fetching tasks" });
-//     });
-// });
+// http://localhost:8020/content/
+router.route("/").get((req,res)=>{
+    Contents.find().then((content)=>{
+        res.json(content);
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).json({ error: "Error fetching tasks" });
+    });
+});
 
 const moment = require('moment');
 

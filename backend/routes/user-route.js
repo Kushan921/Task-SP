@@ -56,61 +56,61 @@ router.route("/login").post((req,res)=>{
 
 
 
-// // http://localhost:8020/task/update/:id
-// router.route("/update/:id").put(async (req,res)=>{
-//     const taskId = req.params.id;
-//     const { date, designer, page, task } = req.body;
+// http://localhost:8020/task/update/:id
+router.route("/update/:id").put(async (req,res)=>{
+    const taskId = req.params.id;
+    const { date, designer, page, task } = req.body;
 
-//     const updatedTask = { date, designer, page, task };
+    const updatedTask = { date, designer, page, task };
 
-//     try {
-//         const updated = await Tasks.findByIdAndUpdate(taskId, updatedTask);
-//         res.status(204).send();
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Error updating task" });
-//     }
-// });
-
-
-// // http://localhost:8020/task/updateOne/:id
-// router.route("/updateOne/:id").put(async (req, res) => {
-//     const taskId = req.params.id;
-//     const task = await Tasks.findById(taskId);
-
-//     if (!task) {
-//         return res.status(404).json({ error: "Task not found" });
-//     }
-
-//     const updatedTask = {
-//         date: req.body.date || task.date,
-//         designer: req.body.designer || task.designer,
-//         page: req.body.page || task.page,
-//         task: req.body.task || task.task,
-//     };
-
-//     try {
-//         const updated = await Tasks.findByIdAndUpdate(taskId, updatedTask, { new: true });
-//         res.json(updated);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Error updating task" });
-//     }
-// });
+    try {
+        const updated = await Tasks.findByIdAndUpdate(taskId, updatedTask);
+        res.status(204).send();
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Error updating task" });
+    }
+});
 
 
-// // http://localhost:8020/task/delete/:id
-// router.route("/delete/:id").delete(async(req, res)=>{
-//     const taskId = req.params.id;
+// http://localhost:8020/task/updateOne/:id
+router.route("/updateOne/:id").put(async (req, res) => {
+    const taskId = req.params.id;
+    const task = await Tasks.findById(taskId);
 
-//     try {
-//         await Tasks.findByIdAndDelete(taskId);
-//         res.status(204).send();
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Error deleting task" });
-//     }
-// });
+    if (!task) {
+        return res.status(404).json({ error: "Task not found" });
+    }
+
+    const updatedTask = {
+        date: req.body.date || task.date,
+        designer: req.body.designer || task.designer,
+        page: req.body.page || task.page,
+        task: req.body.task || task.task,
+    };
+
+    try {
+        const updated = await Tasks.findByIdAndUpdate(taskId, updatedTask, { new: true });
+        res.json(updated);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Error updating task" });
+    }
+});
+
+
+// http://localhost:8020/task/delete/:id
+router.route("/delete/:id").delete(async(req, res)=>{
+    const taskId = req.params.id;
+
+    try {
+        await Tasks.findByIdAndDelete(taskId);
+        res.status(204).send();
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Error deleting task" });
+    }
+});
 
 
 module.exports = router;
